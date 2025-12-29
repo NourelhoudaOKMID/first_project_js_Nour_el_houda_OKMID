@@ -108,6 +108,37 @@ function login() {
     dashboard(user);
 }
 
+// DASHBOARD
+function dashboard(user) {
+
+  while (true) {
+
+    let choice = prompt(`
+Welcome ${user.name}
+Balance: ${user.balance} MAD
+
+1 - Deposit
+2 - Withdraw
+3 - Change Password
+4 - View History (console)
+5 - Logout
+    `);
+
+    if (!choice) continue;
+
+    if (choice === "1") deposit(user);
+    else if (choice === "2") withdraw(user);
+    else if (choice === "3") changePassword(user);
+    else if (choice === "4") showHistory(user);
+    else if (choice === "5") {
+      alert("Logged out");
+      break;
+    }
+    else alert("Invalid option");
+  }
+}
+
+
 // change password 
 
 function changePassword(user) {
