@@ -141,4 +141,6 @@ function withdraw(user){
         alert("invald enough balance ")
         return
     }
+    user.balance -= amout 
+    alert ("withdraw  successful")
 }
