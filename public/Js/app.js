@@ -109,7 +109,7 @@ function login() {
 }
 
 // change password 
- 
+
 function changePassword(user) {
     let oldPassword =prompt("enter  old password : ")
     if (oldPassword !== user.password){
@@ -128,4 +128,17 @@ function changePassword(user) {
     }
     user.password = newPass;
     alert("Password changed successfully");
+}
+
+// withdraw fuction 
+function withdraw(user){
+    let amout = Number(prompt ("Enter amout to withdraw "))
+    if (isNaN(amout) ||  amout <=0){
+        alert("INVALID amount ")
+        return
+    }
+    if (amout > user.balance){
+        alert("invald enough balance ")
+        return
+    }
 }
