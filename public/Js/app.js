@@ -2,36 +2,76 @@
 
 let specialChar = ["@", "#", "-", "+", "*", "/"];
 // check if password contains special char 
-function specialchars(str){
-  return specialChar.some(char => str.includes(char));
+function specialchars(str) {
+    return specialChar.some(char => str.includes(char));
 }
 
 
 
 // class 
 class User {
-    static users =[] 
-    constructor (name , email , password ){
-        this.name = name 
-        this.email = email 
+    static users = []
+    constructor(name, email, password) {
+        this.name = name
+        this.email = email
         this.password = password
-        this.balance = 0 
+        this.balance = 0
         this.history = []
     }
     // to storage
-    static addUser(user){
+    static addUser(user) {
         User.users.push(user)
     }
     // find user by email 
-    static findbyemail(email){
+    static findbyemail(email) {
         return User.users.find(u => u.email === email)
-    
+
+    }
 }
 
 
-    
+// the sign up 
 
+function signUp() {
+    alert("Sign Up ")
+
+    let name = prompt("Enter your name :")
+    if (!name) {
+        alert("please , name is required")
+        return;
+    }
+    let email = prompt("Enter your email : ")
+    if (!email) {
+        alert("Email is required");
+        return;
+    }
+    email = email.toLowerCase().trim();
+    if (User.findbyemail(email)) {
+        alert("this email already exists");
+        return
+    }
+    let password = prompt("Create password ")
+    if (!password) {
+        alert("Password is required ");
+        return;
+    }
+    if (password.length < 7) {
+        alert("password must be at least 7 characters")
+        return
+    }
+    if (!specialchars(password)) {
+        alert("Password must contain one special character " + specialChar)
     }
 
+    let confirm = prompt("Confirm password:");
+    if (confirm !== password) {
+        alert("Passwords do not match");
+        return;
+    }
 
+    let newUser = new User(name.trim(), email, password);
+    User.addUser(newUser);
 
+    alert("Account created successfully");
+    console.log("ALL USERS:", User.users);
+}
