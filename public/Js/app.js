@@ -107,3 +107,25 @@ function login() {
     alert("Welcome " + user.name);
     dashboard(user);
 }
+
+// change password 
+ 
+function changePassword(user) {
+    let oldPassword =prompt("enter  old password : ")
+    if (oldPassword !== user.password){
+        alert("invalid password")
+        return ; 
+    }
+    let newPass = prompt("ENter your new password")
+    if (newPass.length <7 || !specialchars(newPass)){
+        alert(" let your password get strong by  using   specialcharacters like \n  @ , # , - , + , * , /  ")
+        return;
+    }
+    let confirm = prompt("confirm new password : ")
+    if (confirm !== newPass) {
+        alert("Passwords de not match ")
+        return;
+    }
+    user.password = newPass;
+    alert("Password changed successfully");
+}
