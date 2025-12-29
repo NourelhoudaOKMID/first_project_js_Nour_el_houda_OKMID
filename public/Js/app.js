@@ -111,13 +111,13 @@ function login() {
 // change password 
 
 function changePassword(user) {
-    let oldPassword =prompt("enter  old password : ")
-    if (oldPassword !== user.password){
+    let oldPassword = prompt("enter  old password : ")
+    if (oldPassword !== user.password) {
         alert("invalid password")
-        return ; 
+        return;
     }
     let newPass = prompt("ENter your new password")
-    if (newPass.length <7 || !specialchars(newPass)){
+    if (newPass.length < 7 || !specialchars(newPass)) {
         alert(" let your password get strong by  using   specialcharacters like \n  @ , # , - , + , * , /  ")
         return;
     }
@@ -131,16 +131,36 @@ function changePassword(user) {
 }
 
 // withdraw fuction 
-function withdraw(user){
-    let amout = Number(prompt ("Enter amout to withdraw "))
-    if (isNaN(amout) ||  amout <=0){
+function withdraw(user) {
+    let amount = Number(prompt("Enter amount to withdraw "))
+    if (isNaN(amount) || amount <= 0) {
         alert("INVALID amount ")
         return
     }
-    if (amout > user.balance){
+    if (amount > user.balance) {
         alert("invald enough balance ")
         return
     }
-    user.balance -= amout 
-    alert ("withdraw  successful")
+    user.balance -= amount
+    alert("withdraw  successful")
+}
+
+// DEPOSIT
+
+function deposit(user) {
+    let amount = Number(prompt("Enter amount to deposit (max 1000):"));
+
+    if (isNaN(amount) || amount <= 0) {
+        alert("Invalid amount");
+        return;
+    }
+
+    if (amount > 1000) {
+        alert("Max deposit is 1000");
+        return;
+    }
+
+    user.balance += amount;
+    user.history.push(`+ ${amount} MAD deposited`);
+    alert("Deposit successful");
 }
