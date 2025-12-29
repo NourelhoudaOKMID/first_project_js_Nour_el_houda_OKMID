@@ -61,6 +61,7 @@ function signUp() {
     }
     if (!specialchars(password)) {
         alert("Password must contain one special character " + specialChar)
+        return
     }
 
     let confirm = prompt("Confirm password:");
@@ -111,9 +112,9 @@ function login() {
 // DASHBOARD
 function dashboard(user) {
 
-  while (true) {
+    while (true) {
 
-    let choice = prompt(`
+        let choice = prompt(`
 Welcome ${user.name}
 Balance: ${user.balance} MAD
 
@@ -124,18 +125,18 @@ Balance: ${user.balance} MAD
 5 - Logout
     `);
 
-    if (!choice) continue;
+        if (!choice) continue;
 
-    if (choice === "1") deposit(user);
-    else if (choice === "2") withdraw(user);
-    else if (choice === "3") changePassword(user);
-    else if (choice === "4") showHistory(user);
-    else if (choice === "5") {
-      alert("Logged out");
-      break;
+        if (choice === "1") deposit(user);
+        else if (choice === "2") withdraw(user);
+        else if (choice === "3") changePassword(user);
+        else if (choice === "4") showHistory(user);
+        else if (choice === "5") {
+            alert("Logged out");
+            break;
+        }
+        else alert("Invalid option");
     }
-    else alert("Invalid option");
-  }
 }
 
 
@@ -169,7 +170,7 @@ function withdraw(user) {
         return
     }
     if (amount > user.balance) {
-        alert("invald enough balance ")
+        alert("Not  enough balance ")
         return
     }
     user.balance -= amount
@@ -195,3 +196,38 @@ function deposit(user) {
     user.history.push(`+ ${amount} MAD deposited`);
     alert("Deposit successful");
 }
+
+
+
+function showHistory(user) {
+    console.log("---- TRANSACTION HISTORY ----");
+    user.history.forEach(h => console.log(h));
+    console.log("-----------------------------");
+    alert("History printed in console");
+}
+
+
+
+function startApp() {
+    while (true) {
+        let choice = prompt(`
+BANK SYSTEM
+1 - Sign Up
+2 - Login
+Type exit to quit
+    `);
+
+        if (!choice) continue;
+
+        if (choice === "1") signUp();
+        else if (choice === "2") login();
+        else if (choice.toLowerCase() === "exit") {
+            alert("Goodbye");
+            break;
+        }
+        else alert("Invalid choice");
+    }
+}
+
+
+startApp();
