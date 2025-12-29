@@ -75,3 +75,35 @@ function signUp() {
     alert("Account created successfully");
     console.log("ALL USERS:", User.users);
 }
+//login 
+function login() {
+
+    let email = prompt("Enter email:");
+    if (!email || !email.trim()) {
+        alert("Email is required");
+        return;
+    }
+
+    email = email.toLowerCase().trim();
+
+    let user = User.findbyemail(email);
+
+    if (!user) {
+        alert("User not found");
+        return;
+    }
+
+    let password = prompt("Enter password:");
+    if (!password) {
+        alert("Password is required");
+        return;
+    }
+
+    if (password !== user.password) {
+        alert("Wrong password");
+        return;
+    }
+
+    alert("Welcome " + user.name);
+    dashboard(user);
+}
