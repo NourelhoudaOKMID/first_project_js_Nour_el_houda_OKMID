@@ -48,10 +48,7 @@ function signUp() {
     }
     // repeat the prompt with a loop to let the user inser the email again 
     email = email.toLowerCase().trim();
-    if (User.findbyemail(email)) {
-        alert("this email already exists");
-        return
-    }
+    
     //  important check
     if (!email.includes("@") || !email.includes(".")) {
         alert("Invalid email format");
