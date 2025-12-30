@@ -25,31 +25,39 @@ class User {
     // find user by email 
     static findbyemail(email) {
         return User.users.find(u => u.email === email)
-
     }
 }
+
 
 
 // the sign up 
 
 function signUp() {
     alert("Sign Up ")
-
+    //  you must check if the name  has a number  and  also  the lenght 
     let name = prompt("Enter your name :")
     if (!name) {
         alert("please , name is required")
         return;
     }
+
     let email = prompt("Enter your email : ")
     if (!email) {
         alert("Email is required");
         return;
     }
+    // repeat the prompt with a loop to let the user inser the email again 
     email = email.toLowerCase().trim();
     if (User.findbyemail(email)) {
         alert("this email already exists");
         return
     }
+    //  important check
+    if (!email.includes("@") || !email.includes(".")) {
+        alert("Invalid email format");
+        return;
+    }
+
     let password = prompt("Create password ")
     if (!password) {
         alert("Password is required ");
@@ -59,6 +67,9 @@ function signUp() {
         alert("password must be at least 7 characters")
         return
     }
+
+
+
     if (!specialchars(password)) {
         alert("Password must contain one special character " + specialChar)
         return
@@ -80,7 +91,7 @@ function signUp() {
 function login() {
 
     let email = prompt("Enter email:");
-    if (!email || !email.trim()) {
+    if (!email) {
         alert("Email is required");
         return;
     }
@@ -162,6 +173,7 @@ function changePassword(user) {
     alert("Password changed successfully");
 }
 
+
 // withdraw fuction 
 function withdraw(user) {
     let amount = Number(prompt("Enter amount to withdraw "))
@@ -170,7 +182,7 @@ function withdraw(user) {
         return
     }
     if (amount > user.balance) {
-        alert("Not  enough balance ")
+        alert("Not enough balance ")
         return
     }
     user.balance -= amount
@@ -194,6 +206,8 @@ function deposit(user) {
 
     user.balance += amount;
     user.history.push(`+ ${amount} MAD deposited`);
+    // for the history of the withdrawn money 
+    user.history.push(` -${amount} MAD withdrawn`)
     alert("Deposit successful");
 }
 
@@ -205,7 +219,6 @@ function showHistory(user) {
     console.log("-----------------------------");
     alert("History printed in console");
 }
-
 
 
 function startApp() {
